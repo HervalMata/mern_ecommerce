@@ -1,0 +1,11 @@
+const router = require("express").Router();
+const lojaValidator = require("../../../controllers/validations/lojaValidator");
+const auth = require("../../auth");
+const LojaController = require("../../../controllers/LojaController");
+const lojaController = new LojaController();
+router.post("/", lojaController.store);
+router.put("/:id", auth.required, lojaValidator, lojaController.update);
+router.delete("/:id", auth.required, lojaValidator, lojaController.remove);
+router.get("/", auth.required, lojaController.index);
+router.get("/:id", auth.required, lojaController.show);
+module.exports = router;
