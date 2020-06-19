@@ -4,6 +4,7 @@
   "description": "API para ecommerce",
   "main": "server.js",
   "scripts": {
+    "start": "nodemon server.js",
     "test": "mocha --timeout 2000 --exit",
     "dev": "NODE_ENV=development nodemon server.js",
     "buider": "NODE_ENV=production pm2 start server.js --name=\"ecommerce-api\""

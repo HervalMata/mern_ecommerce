@@ -44,8 +44,8 @@ class UsuarioController {
             })).catch(next);;
         }).catch(next);
     }
-    //PUT /
-    delete(req, res, next) {
+    //DELETE /
+    remove(req, res, next) {
         Usuario.findById(req.payload.id).then(usuario => {
             if (!usuario) return res.status(401).json({ errors: "Usuário não registrado"});
             return usuario.remove().then(() => {
@@ -92,7 +92,7 @@ class UsuarioController {
         }).catch(next);
     }
     //POST /senha-recuperada
-    complteRecovery(req, res, next) {
+    completeRecovery(req, res, next) {
         const { token, password } = req.body;
         if (!token || !password) return res.render('recovery/store', { error: "Preencha novamente com sua nova senha", success: null, token: token});
         Usuario.findOne({"recovery.token": token}).then((usuario) => {
@@ -107,3 +107,4 @@ class UsuarioController {
         }).catch(next);
     }
 }
+module.exports = UsuarioController;
