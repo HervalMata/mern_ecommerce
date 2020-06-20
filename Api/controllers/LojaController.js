@@ -27,7 +27,7 @@ class LojaController {
     // PUT /:id
     update(req, res, next) {
         const { nome, cnpj, email, telefones, endereco } = req.body;
-        Loja.findById(req.params.id).then(loja => {
+        Loja.findById(req.query.loja).then(loja => {
             if (!loja) return res.status(422).send({ error: "Loja não existe." });
             if ( nome ) loja.nome = nome;
             if ( cnpj ) loja.cnpj = cnpj;
@@ -39,7 +39,7 @@ class LojaController {
     }
     // DELETE /:id
     remove(req, res, next) {
-        Loja.findById(req.params.id).then(loja => {
+        Loja.findById(req.query.loja).then(loja => {
             if (!loja) return res.status(422).send({ error: "Loja não existe." });
             loja.remove().then(() => res.send({ deleted: true })).catch(next);
         }).catch(next);

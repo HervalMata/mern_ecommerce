@@ -1,0 +1,12 @@
+const router = require("express").Router();
+const auth = require("../../auth");
+const Validate = require("express-validation");
+const { LojaValidation } = require("../../../controllers/validations/lojaValidation");
+const LojaController = require("../../../controllers/LojaController");
+const lojaController = new LojaController();
+router.get("/", auth.required, lojaController.index);
+router.get("/:id", auth.required, Validate(LojaValidation.show), lojaController.show);
+router.post("/", Validate(LojaValidation.store), lojaController.store);
+router.put("/:id", auth.required, LojaValidation.admin(), Validate(LojaValidation.update), lojaController.update);
+router.delete("/:id", auth.required, LojaValidation.admin(), lojaController.remove);
+module.exports = router;
